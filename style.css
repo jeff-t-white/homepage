@@ -6,7 +6,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #172033;
-  background: #f2f6fb;
+  background: #f8fafc;
 }
 
 .hero {
@@ -17,13 +17,6 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #f2f6fb, #dcecff);
-}
-
-.eyebrow {
-  margin: 0 0 0.5rem;
-  color: #52627a;
-  font-size: 1.1rem;
 }
 
 h1 {
@@ -39,16 +32,29 @@ h1 {
   line-height: 1.6;
 }
 
-.button {
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.5rem;
-  color: white;
-  background: #2457c5;
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2457c5;
   text-decoration: none;
 }
 
-.button:hover {
-  background: #173f98;
+.social-links a:hover {
+  color: #173f98;
+  text-decoration: underline;
+}
+
+.social-links svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
 }
 
 .profile-photo {
