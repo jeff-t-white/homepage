@@ -4,7 +4,7 @@
   const h = React.createElement;
   const cities = [
     { name: "Chicago", latitude: 41.8781 },
-    { name: "Seattle", latitude: 47.6062 },
+    { name: "Tromsø", latitude: 69.6492 },
     { name: "London", latitude: 51.5074 },
     { name: "Singapore", latitude: 1.3521 },
     { name: "Sydney", latitude: -33.8688 },
@@ -39,9 +39,10 @@
   };
   const width = 720, height = 250;
   const x = d3.scaleLinear().domain([0, days - 1]).range([44, width - 16]).clamp(true);
-  const y = d3.scaleLinear().domain([0, 20]).range([height - 32, 16]);
+  const y = d3.scaleLinear().domain([0, 24]).range([height - 32, 16]);
   const line = d3.line().x(d => x(d.day)).y(d => y(d.hours));
   const area = d3.area().x(d => x(d.day)).y0(y(0)).y1(d => y(d.hours));
+  const nightArea = d3.area().x(d => x(d.day)).y0(d => y(d.hours)).y1(y(24));
   const months = Array.from({ length: 12 }, (_, month) => ({
     day: (Date.UTC(year, month, 15) - start) / 86400000,
     label: new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" })
@@ -55,7 +56,7 @@
     const dateLabel = formatDate.format(new Date(start + day * 86400000));
     const secondary = comparison === "" ? null : Number(comparison);
     const primaryHours = data[city][day].hours;
-    const readout = `${dateLabel}: ${cities[city].name}, ${duration(primaryHours)} of daylight`
+    const readout = `${dateLabel}: ${cities[city].name}, ${duration(primaryHours)} of daylight and ${duration(24 - primaryHours)} of darkness`
       + (secondary === null ? "" : `; ${cities[secondary].name}, ${duration(data[secondary][day].hours)}`);
 
     function selectPointer(event) {
@@ -81,9 +82,13 @@
       ),
       h("div", { className: "daylight-readout" },
         h("span", { className: "daylight-date" }, dateLabel),
-        h("span", { className: "daylight-primary" }, `${cities[city].name} · ${duration(primaryHours)}`),
+        h("span", { className: "daylight-primary" }, `${cities[city].name} · ${duration(primaryHours)} daylight · ${duration(24 - primaryHours)} darkness`),
         secondary === null ? null : h("span", { className: "daylight-comparison" },
           `${cities[secondary].name} · ${duration(data[secondary][day].hours)}`),
+      ),
+      h("div", { className: "daylight-legend", "aria-label": "Chart colors" },
+        h("span", null, h("span", { className: "daylight-swatch", "aria-hidden": true }), "Daylight"),
+        h("span", null, h("span", { className: "daylight-swatch daylight-swatch-night", "aria-hidden": true }), "Darkness"),
       ),
       h("svg", {
         className: "daylight-chart", viewBox: `0 0 ${width} ${height}`,
@@ -93,11 +98,12 @@
       },
       h("title", { id: "daylight-chart-title" }, `Daylight hours in ${cities[city].name}, ${year}`),
       h("desc", { id: "daylight-chart-desc" },
-        `Daily estimated daylight hours from January to December. ${readout}. Use the date slider below to explore.`),
-      [0, 5, 10, 15, 20].map(hours => h("g", { key: hours },
+        `Each day totals 24 hours: yellow below the curve represents daylight, gray above represents darkness. ${readout}. Use the date slider below to explore.`),
+      h("path", { d: nightArea(data[city]), className: "daylight-night-area" }),
+      h("path", { d: area(data[city]), className: "daylight-area" }),
+      [0, 6, 12, 18, 24].map(hours => h("g", { key: hours },
         h("line", { x1: 44, x2: width - 16, y1: y(hours), y2: y(hours), className: "daylight-grid" }),
         h("text", { x: 34, y: y(hours) + 4, textAnchor: "end", className: "daylight-axis" }, `${hours}h`))),
-      h("path", { d: area(data[city]), className: "daylight-area" }),
       secondary === null ? null : h("path", { d: line(data[secondary]), className: "daylight-line daylight-line-comparison" }),
       h("path", { d: line(data[city]), className: "daylight-line" }),
       months.map(month => h("text", { key: month.label, x: x(month.day), y: height - 8,
