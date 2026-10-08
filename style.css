@@ -64,3 +64,99 @@ h1 {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.daylight-section {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.daylight-section header {
+  padding-top: 2.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.daylight-section h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.daylight-intro {
+  margin: 0.5rem 0 2rem;
+  color: #52627a;
+  line-height: 1.5;
+}
+
+.daylight-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+
+.daylight-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #52627a;
+  font-size: 0.8rem;
+}
+
+.daylight-controls select {
+  min-height: 44px;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border: 1px solid #d5deea;
+  border-radius: 6px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.daylight-year {
+  margin-left: auto;
+  padding-bottom: 0.75rem;
+  color: #52627a;
+  font-size: 0.85rem;
+}
+
+.daylight-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 1.75rem 0 0.5rem;
+  min-height: 2.5rem;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.daylight-date { color: #172033; }
+.daylight-primary { color: #2457c5; }
+.daylight-comparison { color: #52627a; }
+.daylight-chart { display: block; width: 100%; height: auto; touch-action: pan-y; }
+.daylight-grid { stroke: #e2e8f0; stroke-width: 1; }
+.daylight-axis { fill: #52627a; font-size: 12px; }
+.daylight-area { fill: #2457c5; fill-opacity: 0.06; }
+.daylight-line { fill: none; stroke: #2457c5; stroke-width: 2; }
+.daylight-line-comparison { stroke: #7c8ba1; stroke-dasharray: 5 4; }
+.daylight-guide { stroke: #bdc9db; stroke-dasharray: 3 4; }
+.daylight-dot { fill: #2457c5; stroke: #f8fafc; stroke-width: 2; }
+.daylight-dot-comparison { fill: #7c8ba1; }
+
+.daylight-slider-label { font-size: 0.8rem; color: #52627a; }
+.daylight-slider { display: block; width: 100%; min-height: 44px; margin: 0; accent-color: #2457c5; }
+.daylight-hint, .daylight-source { color: #52627a; font-size: 0.75rem; line-height: 1.6; }
+.daylight-hint { margin: 0.25rem 0 0; }
+.daylight-source { margin-top: 1.5rem; }
+.daylight-source a { color: inherit; text-underline-offset: 3px; }
+
+a:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 2px solid #2457c5;
+  outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .daylight-readout { min-height: 3.75rem; }
+}

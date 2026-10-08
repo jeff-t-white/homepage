@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jeff White | Home</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"
+    ></script>
+    <script defer src="daylight.js"></script>
   </head>
   <body>
     <main class="hero">
       <img class="profile-photo" src="2021 headshot.jpg" alt="Jeff White" />
       <h1>Jeff White</h1>
-      <p class="tagline">
-        Exploring web development and data visualization.
-      </p>
+      <p class="tagline">Exploring web development and data visualization.</p>
       <nav class="social-links" aria-label="Social links">
         <a
           href="https://github.com/jeff-t-white"
@@ -42,5 +53,26 @@
         </a>
       </nav>
     </main>
+    <section class="daylight-section" aria-labelledby="daylight-title">
+      <header>
+        <h2 id="daylight-title">A year of daylight</h2>
+        <p class="daylight-intro">How the seasons shape our days.</p>
+      </header>
+      <div id="daylight-root">
+        <p>
+          The interactive chart needs JavaScript and an internet connection.
+          Refresh the page to try again.
+        </p>
+      </div>
+      <p class="daylight-source">
+        Approximate sunrise-to-sunset hours ·
+        <a
+          href="https://gml.noaa.gov/grad/solcalc/solareqns.PDF"
+          target="_blank"
+          rel="noopener noreferrer"
+          >NOAA solar equations</a
+        >
+      </p>
+    </section>
   </body>
 </html>
